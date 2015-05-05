@@ -17,14 +17,17 @@
 			$( '.site-description' ).text( to );
 		} );
 	} );
+
   wp.customize( 'header_x_position_small', function( value ) {
     value.bind( function( to ) {
       var window_width = $( window ).width();
       header_position_small=to;
       if(window_width<600) {
         $('.hero.without-featured-image').css({'background-position-x': to});
+        $('.hero.with-featured-image').css({'background-position-x': to});
       } else {
         $('.hero.without-featured-image').css({'background-position-x': 0});
+        $('.hero.with-featured-image').css({'background-position-x': 0});
       }
     } );
   } );
@@ -34,6 +37,7 @@
       header_position_medium=to;
       if(600<=window_width<768) {
         $('.hero.without-featured-image').css({'background-position-x': to});
+        $('.hero.with-featured-image').css({'background-position-x': to});
       }
     } );
   } );
@@ -43,6 +47,7 @@
       header_position_large=to;
       if(768<=window_width<1020) {
         $('.hero.without-featured-image').css({'background-position-x': to});
+        $('.hero.with-featured-image').css({'background-position-x': to});
       }
     } );
   } );
@@ -96,14 +101,19 @@
     }
     if(window_width<600) {
       $('.hero.without-featured-image').css({'background-position-x': header_position_small});
+      $('.hero.with-featured-image').css({'background-position-x': header_position_small});
     } else if(600<=window_width<768) {
       $('.hero.without-featured-image').css({'background-position-x': header_position_medium});
+      $('.hero.with-featured-image').css({'background-position-x': header_position_medium});
     } else if(768<=window_width<1020) {
       $('.hero.without-featured-image').css({'background-position-x': header_position_large});
+      $('.hero.with-featured-image').css({'background-position-x': header_position_large});
     } else if(window_width>1020) {
       $('.hero.without-featured-image').css({'background-position-x': 0});
+      $('.hero.with-featured-image').css({'background-position-x': 0});
     } else {
       $('.hero.without-featured-image').css({'background-position': '50% 50%'});
+      $('.hero.with-featured-image').css({'background-position': '50% 50%'});
     }
 
   } );

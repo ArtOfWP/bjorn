@@ -22,7 +22,7 @@ function bjorn_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'site_logo' )->transport = 'refresh';
 
 	/* Adds textarea support to the theme customizer */
-	class Goran_WP_Customize_Control_Textarea extends WP_Customize_Control {
+	class Bjorn_WP_Customize_Control_Textarea extends WP_Customize_Control {
 	    public $type = 'textarea';
 
 	    public function render_content() {
@@ -40,7 +40,7 @@ function bjorn_customize_register( $wp_customize ) {
 		'default'           => '',
 		'sanitize_callback' => 'wp_kses_post',
 	) );
-	$wp_customize->add_control( new Goran_WP_Customize_Control_Textarea( $wp_customize, 'bjorn_top_area_content', array(
+	$wp_customize->add_control( new Bjorn_WP_Customize_Control_Textarea( $wp_customize, 'bjorn_top_area_content', array(
 		'label'             => __( 'Top Area Content', 'bjorn' ),
 		'section'           => 'edin_theme_options',
 		'priority'          => 3,
@@ -110,9 +110,32 @@ function bjorn_customize_register( $wp_customize ) {
         'type'        => 'color',
         'settings'     => 'link_color'
     ));
+
+    $wp_customize->add_setting( 'bjorn_hide_portfolio_page_content', array(
+        'default'           => '',
+        'sanitize_callback' => 'bjorn_sanitize_checkbox',
+    ) );
+
+    $wp_customize->add_control( 'bjorn_hide_portfolio_page_content', array(
+        'label'             => __( 'Hide title and content on Portfolio Page Template', 'bjorn' ),
+        'section'           => 'edin_theme_options',
+        'type'              => 'checkbox',
+    ) );
 }
 add_action( 'customize_register', 'bjorn_customize_register', 11 );
-
+/**
+ * Sanitize the checkbox.
+ *
+ * @param boolean $input.
+ * @return boolean true if portfolio page template displays title and content.
+ */
+function bjorn_sanitize_checkbox( $input ) {
+    if ( 1 == $input ) {
+        return true;
+    } else {
+        return false;
+    }
+}
 /**
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */

@@ -61,9 +61,40 @@ function bjorn_setup() {
 	 */
 	add_theme_support( 'eventbrite' );
 
+    /**
+     * Add theme support for Portfolio Custom Post Type.
+     */
+    add_theme_support( 'jetpack-portfolio' );
 }
 add_action( 'after_setup_theme', 'bjorn_setup', 11 );
+// add categories to attachments
+function bjorn_add_jetpack_portfolio_type_to_attachments() {
+    register_taxonomy_for_object_type( 'jetpack-portfolio-type', 'attachment' );
+}
+add_action( 'init' , 'bjorn_add_jetpack_portfolio_type_to_attachments' );
 
+function bjorn_jetpack_portfolio_rewrites() {
+    add_rewrite_rule('^projects/tagged/(.+)/?', 'index.php?post_type=portfolio&jetpack-portfolio-tag=$matches[1]', 'top');
+    add_rewrite_rule('^projects/(.+)/?', 'index.php?post_type=portfolio&jetpack-portfolio-type=$matches[1]', 'top');
+    add_rewrite_rule('^project/(.+)/?', 'index.php?post_type=portfolio&jetpack-portfolio=$matches[1]', 'top');
+}
+//add_action('init', 'bjorn_jetpack_portfolio_rewrites');
+function bjorn_redirect_jetpack_portfolios() {
+    if(strpos($_SERVER['REQUEST_URI'], 'project-type')===1)
+        wp_redirect(str_replace('project-type', 'projects', $_SERVER['REQUEST_URI']));
+/*    elseif(strpos($_SERVER['REQUEST_URI'], 'portfolio')===1)
+        wp_redirect(str_replace('portfolio', 'project', $_SERVER['REQUEST_URI']));*/
+    elseif(strpos($_SERVER['REQUEST_URI'], 'project-tag')===1)
+        wp_redirect(str_replace('project-tag', 'projects/tagged/', $_SERVER['REQUEST_URI']));
+}
+//add_action('template_redirect', 'bjorn_redirect_jetpack_portfolios');
+
+function bjorn_post_link($permalink, $post, $leavename) {
+    if($post->post_type=='jetpack-portfolio')
+        return str_replace('portfolio', 'project', $permalink);
+    return $permalink;
+}
+add_filter('post_link', 'bjorn_post_link', 10,3);
 /*
  * Setup the WordPress core custom background feature.
  */
