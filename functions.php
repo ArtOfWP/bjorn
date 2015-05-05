@@ -110,7 +110,7 @@ function bjorn_jetpack_portfolio_rewrites() {
     add_rewrite_rule('^projects/(.+)/?', 'index.php?post_type=portfolio&jetpack-portfolio-type=$matches[1]', 'top');
     add_rewrite_rule('^project/(.+)/?', 'index.php?post_type=portfolio&jetpack-portfolio=$matches[1]', 'top');
 }
-//add_action('init', 'bjorn_jetpack_portfolio_rewrites');
+add_action('init', 'bjorn_jetpack_portfolio_rewrites');
 function bjorn_redirect_jetpack_portfolios() {
     if(strpos($_SERVER['REQUEST_URI'], 'project-type')===1)
         wp_redirect(str_replace('project-type', 'projects', $_SERVER['REQUEST_URI']));
