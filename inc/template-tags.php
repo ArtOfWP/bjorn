@@ -125,3 +125,7 @@ function bjorn_hero_background() {
 }*/
 remove_action('wp_enqueue_scripts', 'edin_hero_background' );
 //add_action( 'wp_enqueue_scripts', 'bjorn_hero_background' );
+
+    function bjorn_featured_areas() {
+        get_sidebar( 'featured-areas' );
+    }

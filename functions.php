@@ -67,6 +67,38 @@ function bjorn_setup() {
     add_theme_support( 'jetpack-portfolio' );
 }
 add_action( 'after_setup_theme', 'bjorn_setup', 11 );
+
+function bjorn_widgets_init() {
+    register_sidebar( array(
+        'name'          => __( 'Featured Area One', 'edin' ),
+        'id'            => 'featured-1',
+        'description'   => __( 'Use this widget area to display widgets in the first column of your Front Page', 'edin' ),
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</aside>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name'          => __( 'Featured Area Two', 'edin' ),
+        'id'            => 'featured-2',
+        'description'   => __( 'Use this widget area to display widgets in the second column of your Front Page', 'edin' ),
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</aside>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name'          => __( 'Featured Area Three', 'edin' ),
+        'id'            => 'featured-3',
+        'description'   => __( 'Use this widget area to display widgets in the third column of your Front Page', 'edin' ),
+        'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</aside>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'bjorn_widgets_init' );
+
 // add categories to attachments
 function bjorn_add_jetpack_portfolio_type_to_attachments() {
     register_taxonomy_for_object_type( 'jetpack-portfolio-type', 'attachment' );
