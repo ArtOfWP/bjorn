@@ -5,7 +5,7 @@
 	 */
 	function body_class() {
 
-		window_width = $( window ).width();
+		var window_width = $( window ).width();
 		$( 'body' ).removeClass( 'small-screen medium-screen large-screen' );
 		if ( window_width >= 1020 ) {
 			$( 'body' ).addClass( 'small-screen medium-screen large-screen' );
@@ -22,13 +22,14 @@
 	 */
 	function hero_image() {
 
-		var body, header, header_height, hero, window_width;
+		var body, header, header_height, hero, window_width, site_top_content;
 
 		body = $( 'body' );
 		header = $( '.site-header' );
 		header_height = header.outerHeight();
-		if ( $( '.site-top-content' ).length ) {
-			header_height = header_height - $( '.site-top-content' ).outerHeight();
+		site_top_content=$( '.site-top-content' );
+		if ( site_top_content.length ) {
+			header_height = header_height - site_top_content.outerHeight();
 		}
 		hero = $( '.hero' );
 		window_width = $( window ).width();

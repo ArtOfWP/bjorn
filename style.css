@@ -2918,12 +2918,10 @@ Portfolio
 @media screen and (min-width: 1220px) {
 	.portfolio-wrapper .portfolio-entry {
 		margin: 0 20px;
-		width: 340px;
 	}
 }
 @media screen and (min-width: 768px) and (max-width: 959px) {
 	.portfolio-wrapper .portfolio-entry {
-		width: 50%;
 		margin: 0;
 		padding: 0 20px 40px 20px;
 	}

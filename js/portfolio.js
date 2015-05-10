@@ -20,6 +20,13 @@
 	    		} else {
 		    		$( this ).css( 'margin-left', '-60px' );
 	    		}
+			} else if( $( window ).width() < 1230 ) {
+				$( this ).css( 'width', '100%' ).css( 'width', '+=140px' );
+				if ( $( 'body' ).hasClass( 'rtl' ) ) {
+					$( this ).css( 'margin-right', '-20px' );
+				} else {
+					$( this ).css( 'margin-left', '-20px' );
+				}
 			} else {
 				$( this ).css( {
 					'width': '',
