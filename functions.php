@@ -151,7 +151,7 @@ function bjorn_post_link($permalink, $post, $leavename) {
         return str_replace('portfolio', 'project', $permalink);
     return $permalink;
 }
-add_filter('post_link', 'bjorn_post_link', 10,3);
+add_filter('post_type_link', 'bjorn_post_link', 10,3);
 /*
  * Setup the WordPress core custom background feature.
  */
